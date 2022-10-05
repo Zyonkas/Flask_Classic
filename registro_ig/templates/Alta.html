@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Alta de Ingreso-Gasto</h1>
+<article>
+       <form action="/Alta" method="post">
+              {{ Form.csrf_token }}
+              
+              {{ Form.date.label }}
+              {{ Form.date }}
+              {% if Form.date.errors %}
+                     {% for error in Form.date.errors %}
+                            <p class="error">{{ error }}</p>
+                     {% endfor %}
+              {% endif %}      
+
+              {{ Form.concept.label }}
+              {{ Form.concept(placeholder="Introduce en que te has gastado la pasta") }}      
+              {% if Form.concept.errors %}
+                     {% for error in Form.concept.errors %}
+                            <p class="error">{{ error }}</p>
+                     {% endfor %}
+              {% endif %}
+
+              {{ Form.quantity.label }}
+              {{ Form.quantity(placeholder="Euros gastados o ingresados") }}
+              {% if Form.quantity.errors %}
+                     {% for error in Form.quantity.errors %}
+                            <p class="error">{{ error }}</p>
+                     {% endfor %}
+              {% endif %}
+
+
+              {{ Form.submit }}
+
+
+       </form>
+</article>
+<article class="errores">
+        <ul>
+                {% for error in msgErrors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+        </ul>
+</article>
+
+{% endblock %}
